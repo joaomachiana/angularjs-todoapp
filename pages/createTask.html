@@ -1,0 +1,40 @@
+<form ng-submit="addTask()">
+    <div class="form-group">
+        <label for="task_name">Task Name</label>
+        <input type="text" id="task_name" ng-model="task.task_name" placeholder="Task name">
+    </div>
+
+    <div class="form-group">
+        <label for="task_assignee">Assignee</label>
+        <input type="text" id="task_assignee" ng-model="task.task_assignee" placeholder="Assignee name">
+    </div>
+
+    <div class="form-group">
+        <label for="task_description">Description</label>
+        <textarea class="form-control" id="task_description" ng-model="task.task_description" placeholder="Write the task description here"
+            rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="task_status1">Status</label>
+        {{default}}
+        <select id="task_status1" ng-options="option.name for option in default track by option.id" ng-model="task.status"></select> 
+        <!--<select id="task_status" ng-model="task_status_select">
+            <option value="" selected disabled>Please select</option>
+            <option value="0" class="danger">Not Started</option>
+            <option value="1" class="info">In Progress</option>
+            <option value="0" class="sucess">Done</option>
+
+            
+        </select>
+
+        <select ng-model="task.status" convert-to-number>
+                <option value="0">Zero</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+              </select>-->
+    </div>
+
+
+    <input type="submit" value="Add Task">
+</form>
