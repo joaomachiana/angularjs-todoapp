@@ -18,7 +18,7 @@
     <div class="form-group">
         <label for="task_status1">Status</label>
         {{default}}
-        <select id="task_status1" ng-options="option.name for option in default track by option.id" ng-model="task.status"></select> 
+        <select id="task_status1" ng-options="option.name for option in statuses track by option.id" ng-model="task.status"></select> 
         <!--<select id="task_status" ng-model="task_status_select">
             <option value="" selected disabled>Please select</option>
             <option value="0" class="danger">Not Started</option>

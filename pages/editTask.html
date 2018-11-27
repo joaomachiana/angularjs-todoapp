@@ -1,5 +1,6 @@
 <form ng-submit="editTask()">
     {{task}}
+    {{scope}}
     <div class="form-group">
         <label for="name">Task Name</label>
         <input type="text" id="name" ng-model="task.name" placeholder="Task name">
@@ -17,7 +18,7 @@
 
     <div class="form-group">
         <label for="status">Status</label>
-        <select id="status" ng-options="option.name for option in default track by option.id" ng-model="task.status"></select> 
+        <select id="status" ng-options="option.name for option in statuses track by option.id" ng-model="task.status"></select> 
     </div>
 
 
