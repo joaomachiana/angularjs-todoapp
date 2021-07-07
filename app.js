@@ -1,4 +1,4 @@
-var todoApp = angular.module('todoApp', []);
+var todoApp = angular.module('todoApp', ['ngRoute']);
 
 
 todoApp.directive('taskListView', function() {

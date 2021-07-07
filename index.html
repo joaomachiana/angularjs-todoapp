@@ -2,57 +2,41 @@
 <html ng-app="todoApp">
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+    <script src="controllers/taskControllers2.js"></script>
+    <!-- <script src="controllers/routes.js"></script> -->
+    <script src="services/dbService.js"></script>
+    <script src="directives/directives.js"></script>
+
+
 
 </head>
 
 <body>
 
-    <div class="w3-card-2 w3-margin" style="max-width:400px;" ng-controller="TaskController">
-        <header class="w3-container w3-light-grey w3-padding-16">
-            <h3>Task List</h3>
-        </header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Todo App</a>
+            </div>
 
-        <todo-list-view tasks="tasks" error-message="getErrMsg"></todo-list-view>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/"><i class="fa fa-home"></i> Home</a></li>
+            </ul>
+        </div>
+    </nav>
+    </header>
 
-        <table class="table table-bordered table-hover table-condensed">
-            <thead class="thead-dark">
-                <tr>
-                    <thead>Name</thead>
-                    <thead>Description</thead>
-                    <thead>Assignee</thead>
-                    <thead>Date</thead>
-                    <thead>Status</thead>
-                    <thead colspan='2'>Actions</thead>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="task in tasks">
-                    <td>{{task.name}}</td>
-                    <td>{{task.description}}</td>
-                    <td>{{task.assignee}}</td>
-                    <td ng-if="task.status == 0">Not Started</td>
-                    <td ng-if="task.status == 1">In Progress</td>
-                    <td ng-if="task.status == 2">Done</td>
-                    <td><a class="btn btn-info" href="#" role="button">Update</a></td>
-                    <td><a class="btn btn-danger" href="#" role="button">Delete</a></td>
-                    
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
 
-        <form ng-submit="addTask()">
-            <input type="text" ng-model="task_name" placeholder="Task name here">
-            <input type="text" ng-model="task_description" placeholder="Task description here">
-            <input type="text" ng-model="task_assignee" placeholder="Task assignee here">
-            
-            <input type="text" ng-model="task_status" placeholder="Task status here">
-            <input type="submit" value="Add Task">
-        </form>
+        <div ng-view></div>
 
-        {{getErrMsg}}
     </div>
 
 

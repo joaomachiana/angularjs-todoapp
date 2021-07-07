@@ -1,0 +1,32 @@
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Assignee</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="task in tasks">
+            <td>{{task.id}}</td>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.assignee}}</td>
+            <td>{{task.date}}</td>
+            <td ng-show="{{task.status == 0}}"><p class="btn btn-warning">Not Started</p></td>
+            <td ng-show="{{task.status == 1}}"><p class="btn btn-info">In Progress</p></td>
+            <td ng-show="{{task.status == 2}}"><p class="btn btn-success">Done</p></td>
+            <td>
+                <span ng-click="getTask(task.id)" class="btn btn-warning">Edit</span>
+                <span ng-click="deleteTask(task.id)" class="btn btn-danger">Delete</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="#/createTask" class="btn btn-primary">Add Task</a>
+{{getErrMsg}}

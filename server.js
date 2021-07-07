@@ -45,8 +45,21 @@ app.get('/tasks', function (req, res) {
     connection.query('SELECT * FROM tasks', function (error, data, fields) {
         if (error) throw error;
 
+        
         return res.send(JSON.stringify(data));
     });
+});
+
+
+// Get a task
+app.get('/editTask/:id', function(req, res) {
+    connection.query('SELECT * FROM tasks WHERE id = ? ', [req.params.id], function(error, data, fields) {
+        if (error) throw error;
+
+        console.log(data);
+        return res.send(JSON.stringify(data));
+    })
+
 });
 
 
@@ -70,9 +83,13 @@ app.post('/addtask', function (req, res) {
 app.put('/updatetask', function (req, res) {
 
     let task_id = req.body.task_id;
+    let task_name = req.body.task_name;
+    let task_description = req.body.task_description;
+    let task_assignee = req.body.task_assignee;
     let task_status = req.body.task_status;
 
-    connection.query('UPDATE tasks SET status = ? WHERE id = ?', [task_status, task_id], function (error, results, fields) {
+
+    connection.query('UPDATE tasks SET name = ?, description = ?, assignee = ?, status = ? WHERE id = ?', [task_name, task_description, task_assignee, task_status, task_id], function (error, results, fields) {
         if (error) throw error;
 
         return res.send({ error: false, data: results, message: 'Task has been updated successfully!' });
@@ -81,8 +98,8 @@ app.put('/updatetask', function (req, res) {
 
 
 // Delete task
-app.delete('/deletetask', function (req, res) {
-    let task_id = req.body.task_id;
+app.delete('/deleteTask/:id', function (req, res) {
+    let task_id = req.params.id;
 
     connection.query('DELETE FROM tasks WHERE id = ?', [task_id], function (error, results, fields) {
         if (error) throw error;

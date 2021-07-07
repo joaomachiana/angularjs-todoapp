@@ -3,7 +3,7 @@ var todoApp = angular.module('todoApp', ['ngRoute']);
 
 
 // Controllers
-todoApp.controller('taskController', ['$scope', '$http', 'dbService', '$window', function($scope, $http, dbService, $window) {
+todoApp.controller('taskController', ['$scope', '$http', 'dbService', '$window', '$routeParams', function($scope, $http, dbService, $window, $routeParams) {
 
     $scope.default = [
         {'id' : '0', 'name' : 'Not Started'},
@@ -14,13 +14,27 @@ todoApp.controller('taskController', ['$scope', '$http', 'dbService', '$window',
     // $scope.default =  [0, 1, 2];
 
     var getTasks = function() {
-        dbService.getTasks().then((response) => {
-            //console.log(response.data);
-            $scope.tasks = response.data;
-            
-        }, (response) => {
-            $scope.getErrMsg = 'Error: ' + response;
-        });
+
+        console.log('Parametros ' + $routeParams.id);
+
+        if ($routeParams.id) {
+
+            dbService.getTask($routeParams.id).then((response) => {
+                $scope.task = response.data[0];
+            }, (response) => {
+                $scope.getErrMsg = 'Error: ' + response;
+            });
+
+        } else {
+            dbService.getTasks().then((response) => {
+                //console.log(response.data);
+                $scope.tasks = response.data;
+                
+            }, (response) => {
+                $scope.getErrMsg = 'Error: ' + response;
+            });    
+        }
+        
     }
 
 
@@ -36,22 +50,24 @@ todoApp.controller('taskController', ['$scope', '$http', 'dbService', '$window',
     // Edit Task
     $scope.getTask = function(task_id) {
 
-        dbService.getTask(task_id).then((response) => {
-            console.log(response);
-            console.log(response.data);
-            $scope.task = response.data[0];
+        redirectPage('edit', task_id);
+       /** dbService.getTask(task_id).then((response) => {
+            //console.log(response);
+            //console.log(response.data);
+            //$scope.task = response.data[0];
             // $scope.$watch('task', function() {
             //     $scope.task = response.data; 
             //  });
-            console.log("Scope: " + $scope);
-            console.log("Scoperr: " + $scope.task.name + " | " );
-            redirectPage('edit', task_id);
+            //console.log("Scope: " + $scope);
+            //console.log("Scoperr: " + $scope.task.name + " | " );
+            
+            $scope.task = response.data[0];
             
             console.log('Entrou');
             
         }, (response) => {
             $scope.getErrMsg = 'Error: ' + response;
-        });
+        });*/
 
         
     }
